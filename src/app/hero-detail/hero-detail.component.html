@@ -1,4 +1,4 @@
-<div *ngIf="hero">
+<div *ngIf="hero; else errorPage">
     <h2>{{hero.name | uppercase}} Details</h2>
     <div><span>id: </span>{{hero.id}}</div>
     <div>
@@ -7,3 +7,6 @@
     </div>
     <button (click)="goBack()">go back</button>
 </div>
+<ng-template #errorPage>
+    <app-error-page></app-error-page>
+</ng-template>
