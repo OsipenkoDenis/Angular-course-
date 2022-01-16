@@ -4,9 +4,11 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { HeroResolver } from './hero.resolver';
 
 const routes: Routes = [
-  {path:"heroes", component:HeroesComponent},
+  {path:"heroes", component:HeroesComponent,
+   resolve: {heroes:HeroResolver}},
   {path:"dashboard", component: DashboardComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {path:"detail/:id", component: HeroDetailComponent},

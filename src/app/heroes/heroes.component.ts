@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
-import { MessageService } from '../message.service';
 
 
 @Component({
@@ -11,14 +10,12 @@ import { MessageService } from '../message.service';
 })
 export class HeroesComponent implements OnInit {
 heroes:Hero[] = [];
-
-  constructor(private heroService: HeroService,
-              private messageService: MessageService) {
-   }
+constructor(private route: ActivatedRoute){}
 
    getHeroes(): void{
-    this.heroService.getHeroes()
-         .subscribe(heroes => this.heroes = heroes);
+    this.route.data.subscribe(data =>{
+      this.heroes = data['heroes'];
+    })
    }
 
   ngOnInit(): void {
