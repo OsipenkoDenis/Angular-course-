@@ -35,4 +35,10 @@ export class HeroDetailComponent implements OnInit {
       this.router.navigate(["/error"]);
     }
   }
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
+  }
 }
