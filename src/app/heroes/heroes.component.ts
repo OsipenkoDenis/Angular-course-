@@ -5,7 +5,6 @@ import { HeroService } from '../hero.service';
 import { IAppState } from '../store/state/app.state';
 import { selectHeroList } from '../store/selectors/hero.selectors';
 import { AddHero, GetHeroes, DeleteHero } from '../store/actions/hero.actions';
-import { selectIdDeletedHero } from '../store/selectors/hero.selectors';
 
 
 @Component({
@@ -16,8 +15,8 @@ import { selectIdDeletedHero } from '../store/selectors/hero.selectors';
 export class HeroesComponent implements OnInit {
   heroes$: Hero[] = [];
   heroes = this.store.pipe(select(selectHeroList))
-  idDeletedHero$:number = 0;
-  idDeletedHero = this.store.pipe(select(selectIdDeletedHero))
+  // idDeletedHero$:number = 0;
+  // idDeletedHero = this.store.pipe(select(selectIdDeletedHero))
   constructor(private store: Store<IAppState>) { }
 
   ngOnInit(): void {

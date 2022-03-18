@@ -1,30 +1,35 @@
 import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { DeleteHero} from './store/actions/hero.actions';
-import { IHeroState } from './store/state/hero.state';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { DeleteHero, GetHeroes, SetHeroes} from './store/actions/hero.actions';
 import { Store } from '@ngrx/store';
 import { HeroService } from './hero.service';
-import { HeroActions } from './store/actions/hero.actions';
-import { GetHeroes } from './store/actions/hero.actions';
-import { map } from 'rxjs';
+import { HeroActions} from './store/actions/hero.actions';
+import { map, switchMap } from 'rxjs';
+import { IAppState } from './store/state/app.state';
 
 
 @Injectable()
 export class AppEffects {
-  heroes$ = this._heroService.getHeroes();
-  // idx$ = 
-  // state$ = {}
-@Effect()
-GetHeroes$ = this._action$.pipe(
+  GetHeroes$ = createEffect(()=>{
+   return this._action$.pipe(
+    ofType<GetHeroes>(HeroActions.GetHeroes),
+    switchMap(()=> this._heroService.getHeroes()
+    .pipe(switchMap(async (heroes) => {
+      console.log(heroes);
+      return new SetHeroes(heroes);
+    })))) 
+  })
+
+DeleteHeroes$ = createEffect(()=>{
+return this._action$.pipe(
   ofType<DeleteHero>(HeroActions.DeleteHero),
-  map(action => new GetHeroes()),
-
-
+  switchMap(action => this._heroService.deleteHero(action.payload)
+  .pipe(map(() => new GetHeroes()))),
 )
+}) 
 
-constructor(private _action$: Action,
-            private _store: Store<IHeroState>,
+constructor(private _action$: Actions,
+            private _store: Store<IAppState>,
             private _heroService: HeroService){}
 }

@@ -1,3 +1,4 @@
+import { Hero } from "src/app/hero";
 import { IHeroState, initialHeroState } from "./hero.state";
 
 export interface IAppState {

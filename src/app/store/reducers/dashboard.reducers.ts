@@ -16,10 +16,20 @@ export const heroReducer = (
             
             return {
                 ...state,
-                 idDeletedHero: action.payload
             };
         }
-    
+        case HeroActions.SetHeroes:{
+            return {
+                ...state,
+                heroes:action.payload
+            }
+        }
+        case HeroActions.AddHero:{
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
     default:
         return state;
 }
