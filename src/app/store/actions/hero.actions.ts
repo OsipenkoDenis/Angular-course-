@@ -5,7 +5,7 @@ export enum HeroActions {
     AddHero = '[angular-tour-of-heroes] Add Hero',
     DeleteHero = '[angular-tour-of-heroes] Delete Hero',
     GetHeroes = '[angular-tour-of-heroes] Get Heroes',
-    SetHeroes = '[angular-tour-of-heroes] Set Heroes'
+    SetHeroes = '[angular-tour-of-heroes] Set Heroes',
 }
 
 export class SetHeroes implements Action {
@@ -26,5 +26,4 @@ export class DeleteHero implements Action {
 export class GetHeroes implements Action {
     public readonly type = HeroActions.GetHeroes;
 }
-
 export type HeroAction = AddHero | DeleteHero | GetHeroes | SetHeroes;

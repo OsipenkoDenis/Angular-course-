@@ -1,7 +1,7 @@
 import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DeleteHero, GetHeroes, SetHeroes} from './store/actions/hero.actions';
+import { AddHero, DeleteHero, GetHeroes, SetHeroes} from './store/actions/hero.actions';
 import { Store } from '@ngrx/store';
 import { HeroService } from './hero.service';
 import { HeroActions} from './store/actions/hero.actions';
@@ -16,7 +16,6 @@ export class AppEffects {
     ofType<GetHeroes>(HeroActions.GetHeroes),
     switchMap(()=> this._heroService.getHeroes()
     .pipe(switchMap(async (heroes) => {
-      console.log(heroes);
       return new SetHeroes(heroes);
     })))) 
   })
@@ -28,6 +27,15 @@ return this._action$.pipe(
   .pipe(map(() => new GetHeroes()))),
 )
 }) 
+
+AddHero$ = createEffect(() => {
+  return this._action$.pipe(
+  ofType<AddHero>(HeroActions.AddHero),
+  switchMap(action => this._heroService.addHero(action.payload)
+  .pipe(switchMap(async () => {
+    return new GetHeroes()
+  }))))
+})
 
 constructor(private _action$: Actions,
             private _store: Store<IAppState>,

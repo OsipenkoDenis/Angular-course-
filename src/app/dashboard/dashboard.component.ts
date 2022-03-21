@@ -19,6 +19,5 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new GetHeroes());
-    console.log(this.heroes);
   }
 }
