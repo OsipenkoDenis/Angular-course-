@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { select } from '@ngrx/store';
 import {
-   debounceTime, distinctUntilChanged, mergeMap
+   debounceTime, distinctUntilChanged, mergeMap, map
  } from 'rxjs/operators';
-
 import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { IAppState } from '../store/state/app.state';
+import { selectHeroList } from '../store/selectors/hero.selectors';
 
 @Component({
   selector: 'app-hero-search',
@@ -17,7 +19,7 @@ export class HeroSearchComponent implements OnInit {
   heroes$!: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private store: Store<IAppState>) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -32,7 +34,13 @@ export class HeroSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      mergeMap((term: string) => this.heroService.searchHeroes(term)),
-    );
+      mergeMap((term: string) => this.searchHeroes(term)))}
+
+  searchHeroes(term: string): Observable<Hero[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.store.pipe(select(selectHeroList),
+                          map((heroes)=> {return heroes.filter((hero) => hero.name.includes(term))}))
   }
 }

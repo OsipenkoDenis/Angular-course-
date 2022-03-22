@@ -30,6 +30,12 @@ export const heroReducer = (
                 ...action.payload
             }
         }
+        case HeroActions.UpdateHero: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
     default:
         return state;
 }
