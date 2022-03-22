@@ -6,37 +6,37 @@ export const heroReducer = (
     state = initialHeroState,
     action: HeroAction
 ): IHeroState => {
-    switch (action.type){
+    switch (action.type) {
         case HeroActions.GetHeroes: {
             return {
-                ...state,
+                ...state
             };
         }
         case HeroActions.DeleteHero: {
-            
+
             return {
-                ...state,
+                ...state
             };
         }
-        case HeroActions.SetHeroes:{
+        case HeroActions.SetHeroes: {
             return {
                 ...state,
-                heroes:action.payload
-            }
+                heroes: action.payload
+            };
         }
-        case HeroActions.AddHero:{
+        case HeroActions.AddHero: {
             return {
                 ...state,
                 ...action.payload
-            }
+            };
         }
         case HeroActions.UpdateHero: {
             return {
                 ...state,
                 ...action.payload
-            }
+            };
         }
-    default:
-        return state;
-}
+        default:
+            return state;
+    }
 }

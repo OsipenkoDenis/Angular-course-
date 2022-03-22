@@ -13,7 +13,7 @@ export abstract class BaseRouteReuseStrategy implements RouteReuseStrategy {
   /**
    * A no-op; the route is never stored since this strategy never detaches routes for later re-use.
    */
-  store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void {}
+  store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void { }
 
   /** Returns `false`, meaning the route (and its subtree) is never reattached */
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
@@ -21,7 +21,7 @@ export abstract class BaseRouteReuseStrategy implements RouteReuseStrategy {
   }
 
   /** Returns `null` because this strategy does not store routes for later re-use. */
-  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle|null {
+  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
     return null;
   }
 
@@ -35,4 +35,4 @@ export abstract class BaseRouteReuseStrategy implements RouteReuseStrategy {
   }
 }
 
-export class DefaultRouteReuseStrategy extends BaseRouteReuseStrategy {}
+export class DefaultRouteReuseStrategy extends BaseRouteReuseStrategy { }

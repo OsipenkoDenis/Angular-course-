@@ -11,17 +11,17 @@ export enum HeroActions {
 
 export class SetHeroes implements Action {
     public readonly type = HeroActions.SetHeroes;
-    constructor(public payload: Hero[]){}
+    constructor(public payload: Hero[]) { }
 }
 
 export class AddHero implements Action {
     public readonly type = HeroActions.AddHero;
-    constructor(public payload: Hero){}
+    constructor(public payload: Hero) { }
 }
 
 export class DeleteHero implements Action {
     public readonly type = HeroActions.DeleteHero;
-    constructor(public payload: Hero["id"]){}
+    constructor(public payload: Hero["id"]) { }
 }
 
 export class GetHeroes implements Action {
@@ -29,7 +29,7 @@ export class GetHeroes implements Action {
 }
 
 export class UpdateHero implements Action {
-    public readonly type = HeroActions.UpdateHero
-    constructor(public payload:Hero){}
+    public readonly type = HeroActions.UpdateHero;
+    constructor(public payload: Hero) { }
 }
 export type HeroAction = AddHero | DeleteHero | GetHeroes | SetHeroes | UpdateHero;

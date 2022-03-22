@@ -1,4 +1,3 @@
-import { Hero } from "src/app/hero";
 import { IHeroState, initialHeroState } from "./hero.state";
 
 export interface IAppState {
@@ -7,6 +6,6 @@ export interface IAppState {
 export const initialAppState: IAppState = {
     heroes: initialHeroState
 }
- export function getInitialState(): IAppState {
-     return initialAppState
- }
+export function getInitialState(): IAppState {
+    return initialAppState
+}
