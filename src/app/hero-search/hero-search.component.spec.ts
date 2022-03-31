@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Hero } from '../hero';
 
 import { HeroSearchComponent } from './hero-search.component';
 
@@ -8,7 +11,8 @@ describe('HeroSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeroSearchComponent ]
+      declarations: [ HeroSearchComponent ],
+      imports: [StoreModule.forRoot({})]
     })
     .compileComponents();
   });
@@ -19,7 +23,11 @@ describe('HeroSearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be defined', () => {
+    expect(component).toBeDefined();
   });
+  it('should return a value', () => {
+    component.searchHeroes('e')
+    expect(component.heroes$).toBeTruthy()
+  })
 });

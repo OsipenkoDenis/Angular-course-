@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { HeroesComponent } from './heroes.component';
 
@@ -8,7 +9,8 @@ describe('HeroesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeroesComponent ]
+      declarations: [ HeroesComponent ],
+      imports:[StoreModule.forRoot({})]
     })
     .compileComponents();
   });
@@ -19,7 +21,7 @@ describe('HeroesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be defined', () => {
+    expect(component).toBeDefined();
   });
 });
