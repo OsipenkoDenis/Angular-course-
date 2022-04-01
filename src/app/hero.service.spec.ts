@@ -29,9 +29,9 @@ describe('HeroService', () => {
 
   xit('should call getHeroes', () => {
     const spy = spyOn(service, 'getHeroes')
-    // .and.callFake(() => {
-    //   return EMPTY;
-    // })
+    .and.callFake(() => {
+      return EMPTY;
+    })
     component.ngOnInit()
     expect (component.heroes$.length).toBe(10)
   })
